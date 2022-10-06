@@ -8,11 +8,13 @@ const {
   deleteEmployee,
   searchEmployee,
 } = require("../controller/employee");
+const rules = require("../middleware/rules");
+const validateAddUser = require("../middleware/validate");
 
 router.get("/", employees);
 router.get("/id/:id", getEmployeeById);
 router.get("/search", searchEmployee);
-router.post("/add", addEmployee);
+router.post("/add", rules, validateAddUser, addEmployee);
 router.put("/edit/:id", editEmployee);
 router.delete("/delete/:id", deleteEmployee);
 
