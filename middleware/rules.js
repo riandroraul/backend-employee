@@ -6,11 +6,13 @@ const rules = [
     .withMessage("name is required")
     .isString()
     .withMessage("name must contain letter")
+    .matches(/^[A-Za-z0-9 .,'!&]+$/)
+    .withMessage("name must be letters")
     .trim()
     .escape(),
   check("Email")
     .notEmpty()
-    .withMessage("name is required")
+    .withMessage("email is required")
     .isEmail()
     .withMessage("email must be valid")
     .normalizeEmail()
@@ -22,7 +24,6 @@ const rules = [
     .isMobilePhone("id-ID")
     .withMessage("mobile number must be valid")
     .isLength({ min: 11, max: 15 })
-    .withMessage("mobile number must be valid")
     .trim()
     .escape(),
   check("Birthdate")

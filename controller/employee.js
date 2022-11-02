@@ -36,17 +36,19 @@ class NoUrut {
 const addEmployee = async (req, res) => {
   try {
     let ttl = req.body.Birthdate;
+    ttl = ttl.toString().split("T")[0];
+    console.log(ttl);
     let gen = ttl.split("-")[0] + ttl.split("-")[1];
-    console.log(gen);
     let month = new Date().getMonth() + 1;
     let year = new Date().getFullYear();
     let id = gen.slice(2) + month.toString() + year.toString().split("20")[1];
-    let numberId = parseInt(id + NoUrut.count);
+    let numberId = parseInt(id);
+    console.log(numberId);
     NoUrut.count++;
     const maxId = await queryPromise(
       `SELECT ID FROM users WHERE ID = (SELECT MAX(ID) FROM users)`
     );
-    console.log(maxId);
+    console.log(numberId);
     const result = await queryPromise(
       `INSERT INTO users (ID, Name, Email, Mobile, Birthdate, Address) VALUES ( '${numberId.toString()}', '${
         req.body.Name
