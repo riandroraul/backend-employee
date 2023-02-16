@@ -26,6 +26,9 @@ const rules = [
     .isLength({ min: 11, max: 15 })
     .trim()
     .escape(),
+  (req, res) => {
+    return res;
+  },
   check("Birthdate")
     .notEmpty()
     .withMessage("Birthdate is required")
